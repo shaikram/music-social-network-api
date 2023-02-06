@@ -3,13 +3,15 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\LogoutRequest;
+use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    public function register(Request $request)
+    public function register(RegisterRequest $request)
     {
 
         try {
@@ -33,7 +35,7 @@ class AuthController extends Controller
         }
     }
 
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
         try {
 
@@ -41,6 +43,7 @@ class AuthController extends Controller
 
 
             if (Hash::check($request->input('password'), $user->password)) {
+
                 $token = $user->createToken('user_token')->plainTextToken;
 
                 return response()->json([ 'user' => $user, 'token' => $token ], 200);
@@ -56,7 +59,7 @@ class AuthController extends Controller
         }
     }
 
-    public function logout(Request $request)
+    public function logout(LogoutRequest $request)
     {
         try {
 

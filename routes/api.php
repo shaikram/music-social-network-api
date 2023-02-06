@@ -25,14 +25,16 @@ Route::get('test', function () {
 
 Route::post('register', [\App\Http\Controllers\API\AuthController::class, 'register']);
 
+Route::post('login', [\App\Http\Controllers\API\AuthController::class, 'login']);
+
 Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('inside-mware', function () {
         return response()->json('success', 200);
     });
 
-    // Route::get('users/{id}', [\App\Http\Controllers\API\UserController::class, 'show']);
-    // Route::put('users/{id}', [\App\Http\Controllers\API\UserController::class, 'update']);
+    Route::get('users/{id}', [\App\Http\Controllers\API\UserController::class, 'show']);
+    Route::put('users/{id}', [\App\Http\Controllers\API\UserController::class, 'update']);
 
     // Route::get('youtube/{user_id}', [\App\Http\Controllers\API\YoutubeController::class, 'show']);
     // Route::post('youtube', [\App\Http\Controllers\API\YoutubeController::class, 'store']);
@@ -51,6 +53,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Route::get('user/{user_id}/posts', [\App\Http\Controllers\API\PostsByUserController::class, 'show']);
 
-    // Route::post('logout', [\App\Http\Controllers\API\AuthController::class, 'logout']);
+    Route::post('logout', [\App\Http\Controllers\API\AuthController::class, 'logout']);
 
 });
