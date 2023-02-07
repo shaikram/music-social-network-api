@@ -49,8 +49,8 @@ class UserController extends Controller
 
             $user->first_name = $request->first_name;
             $user->last_name = $request->last_name;
-            // $user->location = $request->location;
-            // $user->description = $request->description;
+            $user->location = $request->location;
+            $user->description = $request->description;
 
             $user->save();
 
